@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractOperation.hpp" />
+    <ClInclude Include="AdditionOperation.hpp" />
     <ClInclude Include="Operation.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
