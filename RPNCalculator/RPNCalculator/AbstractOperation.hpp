@@ -1,8 +1,8 @@
 #include "Operation.hpp"
 class AbstractOperation : public Operation
 {
-	explicit AbstractOperation(const char& c) : operation_type(c) {}
-	
+	AbstractOperation(const char& c) : operation_type(c) {}
+	char get_code() const { return operation_type; }
 
 private:
 	char operation_type;
