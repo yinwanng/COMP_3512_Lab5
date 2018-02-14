@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractOperation.hpp" />
     <ClInclude Include="AdditionOperation.hpp" />
+    <ClInclude Include="MultiplicationOperation.hpp" />
     <ClInclude Include="Operation.hpp" />
     <ClInclude Include="SubstractionOperation.hpp" />
   </ItemGroup>
