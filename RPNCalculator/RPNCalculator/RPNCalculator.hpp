@@ -1,4 +1,6 @@
+
 #include <stack>
+#include <sstream>
 #include "AdditionOperation.hpp"
 #include "SubstractionOperation.hpp"
 #include "DivisionOperation.hpp"
@@ -41,6 +43,28 @@ private:
 			result = o->perform(a, b);
 			stack.push(result);
 		}
+	}
+
+	int process_form(std::string formula)
+	{
+		std::istringstream iss(formula);
+		std::string operand;
+
+		while (iss >> operand)
+		{
+			std::istringstream iss2(operand);
+			int value;
+			if (iss2 >> value)
+			{
+				stack.push(value);
+			}
+			else 
+			{
+				perform(operation_type(operand[0]));
+			}
+
+		}
+		return stack.top();
 	}
 };
 
