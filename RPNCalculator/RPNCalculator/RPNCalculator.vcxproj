@@ -118,6 +118,7 @@
     <ClInclude Include="AbstractOperation.hpp" />
     <ClInclude Include="AdditionOperation.hpp" />
     <ClInclude Include="Operation.hpp" />
+    <ClInclude Include="SubstractionOperation.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
