@@ -1,4 +1,4 @@
-
+#pragma once
 #include <stack>
 #include <sstream>
 #include "AdditionOperation.hpp"
@@ -9,43 +9,11 @@
 class RPNCalculator
 {
 public:
-
-private:
-	int result;
-	std::stack<int> stack;
-	Operation * operation_type(int operation) 
-	{
-		switch (operation) {
-		case '+':
-			return new AdditionOperation;
-			break;
-		case '-': 
-			return new SubstractionOperation;
-			break;
-		case '*':
-			return new MultiplicationOperation;
-			break;
-		case '/':
-			return new DivisionOperation;
-			break;
-		}
-	}
-	void perform(Operation * o){
-		//pop top two numbers from stack
-		//apply operation, make sure operator is correct
-		// push back to stack
-		if (stack.size == 2) {
-			int a = stack.top();
-			stack.pop();
-			int b = stack.top();
-			stack.pop();
-			//result = a << o->get_code << b;
-			result = o->perform(a, b);
-			stack.push(result);
-		}
-	}
-
-	int process_form(std::string formula)
+	// Reads the formula from left to right. Integers in the formula will be pushed
+	// to the stack. When an operation is encountered, the top two operands must be removed from
+	// the stack and used with the operator. The result will be pushed back on the stack.
+	// Final value will be returned when reached end of formula.
+	int process_formula(std::string formula)
 	{
 		std::istringstream iss(formula);
 		std::string operand;
@@ -58,13 +26,54 @@ private:
 			{
 				stack.push(value);
 			}
-			else 
+			else
 			{
 				perform(operation_type(operand[0]));
 			}
-
 		}
 		return stack.top();
+	}
+
+private:
+	int result;
+	std::stack<int> stack;
+
+	// Accepts an in called option and return a pointer to Operation. 
+	// Allows us to use polymorphism
+	Operation* operation_type(int operation) 
+	{
+		switch (operation) {
+		case '+':
+			return new AdditionOperation();
+			break;
+		case '-': 
+			return new SubstractionOperation();
+			break;
+		case '*':
+			return new MultiplicationOperation;
+			break;
+		case '/':
+			return new DivisionOperation;
+			break;
+		default:
+			return nullptr;
+		}
+	}
+
+	// This member function accepts a parameter which is a pointer to an Operation.
+	// pop top two numbers from stack
+	// apply operation, make sure operator is correct
+	// push back to stack
+	void perform(Operation * o){
+
+		if (stack.size() == 2) {
+			int a = stack.top();
+			stack.pop();
+			int b = stack.top();
+			stack.pop();
+			result = o->perform(b, a);
+			stack.push(result);
+		}
 	}
 };
 
